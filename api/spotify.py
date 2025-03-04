@@ -120,8 +120,15 @@ def makeSVG(data, background_color, border_color):
     contentBar = "".join(["<div class='bar'></div>" for _ in range(barCount)])
     barCSS = barGen(barCount)
 
+    neonCSS = """
+    .neon {
+        border: 2px solid #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
+    }
+    """
+
     if not "is_playing" in data:
-        #contentBar = "" #Shows/Hides the EQ bar if no song is currently playing
         currentStatus = "Recently played:"
         recentPlays = get(RECENTLY_PLAYING_URL)
         recentPlaysLength = len(recentPlays["items"])
@@ -148,6 +155,7 @@ def makeSVG(data, background_color, border_color):
     dataDict = {
         "contentBar": contentBar,
         "barCSS": barCSS,
+        "neonCSS": neonCSS,
         "artistName": artistName,
         "songName": songName,
         "songURI": songURI,
